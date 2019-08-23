@@ -261,8 +261,6 @@ unless $standalonemode {
       'realm'                              => undef,
       'netbios name'                       => $smbname,
       'security'                           => $security,
-      #'vfs objects'                        => 'acl_xattr',
-      #'dedicated keytab file'              => '/etc/krb5.keytab',
       'map acl inherit'                    => 'No',
       'store dos attributes'               => 'Yes',
       'map untrusted to domain'            => 'No ',
