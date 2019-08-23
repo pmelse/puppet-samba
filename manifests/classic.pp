@@ -259,7 +259,7 @@ class samba::classic(
       'winbind separator'                  => '+',
     }
   }
-  else if $standalonemode {
+  elsif $standalonemode {
       $mandatoryglobaloptions = {
       'workgroup'                          => $domain,
       'realm'                              => undef,
