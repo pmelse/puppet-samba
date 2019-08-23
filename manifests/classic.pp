@@ -60,15 +60,11 @@ class samba::classic(
   Array $additional_realms        = [],
 ) inherits samba::params{
 
-
+if $standalonemode { } else {
   unless is_domain_name($realm){
     fail('realm must be a valid domain')
   }
-
-  unless is_domain_name($realm){
-    fail('realm must be a valid domain')
-  }
-
+}
   validate_slength($smbname, 15)
   unless is_domain_name("${smbname}.${realm}"){
     fail('smbname must be a valid domain')
