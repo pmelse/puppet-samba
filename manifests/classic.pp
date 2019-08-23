@@ -55,6 +55,7 @@ class samba::classic(
   $globaloptions                  = {},
   $globalabsentoptions            = [],
   $joinou                         = undef,
+  $standalonemode                 = false,
   Optional[String] $default_realm = undef,
   Array $additional_realms        = [],
 ) inherits samba::params{
@@ -257,6 +258,19 @@ class samba::classic(
       'winbind refresh tickets'            => 'Yes',
       'winbind separator'                  => '+',
     }
+  }
+  else if $standalonemode {
+      $mandatoryglobaloptions = {
+      'workgroup'                          => $domain,
+      'realm'                              => undef,
+      'netbios name'                       => $smbname,
+      'security'                           => $security,
+      #'vfs objects'                        => 'acl_xattr',
+      #'dedicated keytab file'              => '/etc/krb5.keytab',
+      'map acl inherit'                    => 'No',
+      'store dos attributes'               => 'Yes',
+      'map untrusted to domain'            => 'No ',
+    }    
   }
   else {
     $mandatoryglobaloptions = {
