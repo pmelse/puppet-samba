@@ -60,7 +60,7 @@ class samba::classic(
   Array $additional_realms        = [],
 ) inherits samba::params{
 
-if $standalonemode { } else {
+unless $standalonemode {
   unless is_domain_name($realm){
     fail('realm must be a valid domain')
   }
@@ -88,9 +88,9 @@ if $standalonemode { } else {
   $realmlowercase = downcase($realm)
   $realmuppercase = upcase($realm)
   $globaloptsexclude = concat(keys($globaloptions), $globalabsentoptions)
-
-  $_default_realm = pick($default_realm, $realmuppercase)
-
+  unless $standalonemode {
+    $_default_realm = pick($default_realm, $realmuppercase)
+  }
 
   file { '/etc/samba/':
     ensure  => 'directory',
